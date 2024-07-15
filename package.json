@@ -1,0 +1,17 @@
+{
+  "name": "pb-final-project-goitsy",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "colors": "^1.4.0",
+    "node-emoji": "^2.1.3",
+    "readline-sync": "^1.4.10"
+  }
+}
