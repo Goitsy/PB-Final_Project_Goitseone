@@ -10,10 +10,12 @@
 
 :white_medium_small_square: ReadMe (initialise)
 
-:white_medium_small_square: Node Packages needed for project
+:white_medium_small_square: Import required Modules for project
 
 :white_medium_small_square: project files
 
 :white_medium_small_square: Make a git repository for project (to take care of version control)
 
 :white_medium_small_square: run a bit of code to make sure dependencies are working
+
+:white_medium_small_square: write the function to choose card with the array of objects that holds all the cards
