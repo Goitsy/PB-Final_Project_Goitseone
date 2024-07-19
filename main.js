@@ -1,5 +1,4 @@
 const readlineSync = require("readline-sync");
-const terminal = require("terminal-kit").terminal;
 const colors = require("colors");
 const emoji = require("node-emoji");
 const clear = require("clear");
@@ -263,7 +262,6 @@ const majorArcanaCards = [
                 `,
   },
 ];
-
 const chooseTarotCard = (tarotDeck) => {
   const randomIndex = Math.floor(Math.random() * tarotDeck.length);
   const card = tarotDeck[randomIndex];
@@ -304,7 +302,7 @@ const performAReading = (typeOfReading) => {
   }
 
   console.log(
-    chalk.bold.magentaBright(
+    chalk.underline.bold.magentaBright(
       "🔮 Welcome to Makhosi's Tarot Card Reading App! 🔮\n"
     )
   );
@@ -318,17 +316,20 @@ const performAReading = (typeOfReading) => {
       console.log(`  ${line.trim()}`);
     });
     if (index < chosenCards.length - 1) {
-      terminal(
+      console.log(
         "\n-----------------------------------------------------------------------------------------------------------------------------------------\n"
       );
     }
   });
+
+  console.log(chalk.green("\nPress Enter to return to the main menu."));
+  readlineSync.question();
 };
 
 const displayTarotInstructions = () => {
   clear();
   console.log(
-    chalk.bold.magentaBright(
+    chalk.underline.bold.magentaBright(
       "🔮 Welcome to Makhosi's Tarot Card Reading App! 🔮\n"
     )
   );
@@ -347,6 +348,9 @@ const displayTarotInstructions = () => {
       "3. Three-Card Reading: Understand the past, present, and future."
     )
   );
+
+  console.log(chalk.green("\nPress Enter to return to the main menu."));
+  readlineSync.question();
 };
 
 const displayTarotHistory = () => {
@@ -359,69 +363,64 @@ const displayTarotHistory = () => {
     chalk.yellowBright(
       `
     Tarot cards have been used for centuries as a tool for divination and insight. Originating in the mid-15th century in Europe, 
-    they were initially used for playing games.Over time, they evolved into a method for spiritual and self-reflection, with each 
+    they were initially used for playing games. Over time, they evolved into a method for spiritual and self-reflection, with each 
     card holding unique symbolism and meaning.
     `
     )
   );
+
+  console.log(chalk.green("\nPress Enter to return to the main menu."));
+  readlineSync.question();
 };
 
 const gameMenu = () => {
-  clear();
-  console.log(
-    chalk.bold.magentaBright(
-      "🔮 Welcome to Makhosi's Tarot Card Reading App! 🔮\n"
-    )
-  );
-  console.log(chalk.bold.blue("\nCHOOSE A READING:").underline);
-  console.log(chalk.magentaBright("[1] One-Card Reading"));
-  console.log(chalk.magentaBright("[2] Two-Card Reading"));
-  console.log(chalk.magentaBright("[3] Three-Card Reading"));
-  console.log(chalk.magentaBright("[4] Instructions"));
-  console.log(chalk.magentaBright("[5] History of Tarot"));
-  console.log(chalk.bold.red("[6] Exit"));
+  let exitGame = false;
 
-  let choiceOfReading;
-  while (true) {
-    choiceOfReading = readlineSync.questionInt(
-      chalk.blueBright.bold("\nWhat would you like to do? [1...6]: ")
+  while (!exitGame) {
+    clear();
+    console.log(
+      chalk.underline.bold.magentaBright(
+        "🔮 Welcome to Makhosi's Tarot Card Reading App! 🔮\n"
+      )
     );
-    if (choiceOfReading >= 1 && choiceOfReading <= 6) {
-      break;
-    } else {
-      console.log(
-        chalk.red(
-          "INVALID CHOICE! ❌ Please enter a valid number between 1 and 6."
-        )
-      );
+    const choice = readlineSync.question(
+      chalk.blue(
+        chalk.bold.underline.yellowBright("CHOOSE A READING:\n") +
+          "🔮[1] One-Card Reading\n" +
+          "🔮[2] Two-Card Reading\n" +
+          "🔮[3] Three-Card Reading\n" +
+          "📜[4] Instructions\n" +
+          "📚[5] History of Tarot\n" +
+          chalk.red("  [6]❌  Exit\n\n") +
+          chalk.greenBright("Enter your choice: ")
+      )
+    );
+    switch (choice) {
+      case "1":
+        console.log(chalk.blue("Performing 1 card reading..."));
+        performAReading("one");
+        break;
+      case "2":
+        console.log(chalk.blue("Performing 2 card reading..."));
+        performAReading("two");
+        break;
+      case "3":
+        console.log(chalk.blue("Performing 3 card reading..."));
+        performAReading("three");
+        break;
+      case "4":
+        displayTarotInstructions();
+        break;
+      case "5":
+        displayTarotHistory();
+        break;
+      case "6":
+        console.log("Goodbye! 🌈");
+        exitGame = true;
+        break;
+      default:
+        console.log(chalk.red("Invalid Choice! ❌"));
     }
-  }
-
-  switch (choiceOfReading) {
-    case 1:
-      console.log(chalk.blue("Performing 1 card reading..."));
-      performAReading("one");
-      break;
-    case 2:
-      console.log(chalk.blue("Performing 2 card reading..."));
-      performAReading("two");
-      break;
-    case 3:
-      console.log(chalk.blue("Performing 3 card reading..."));
-      performAReading("three");
-      break;
-    case 4:
-      displayTarotInstructions();
-      break;
-    case 5:
-      displayTarotHistory();
-      break;
-    case 6:
-      console.log("Goodbye! 🌈");
-      process.exit();
-      break;
-    default:
-      console.log(chalk.red("Invalid Choice! ❌"));
   }
 };
 
