@@ -1,9 +1,14 @@
+//Imported libraries that add color and syles to console.logs
+//readline sync (a library for interactive input from user using the console)
+//clear library was used for a more cleaner output that clears the console after interactions
+
 const readlineSync = require("readline-sync");
 const colors = require("colors");
 const emoji = require("node-emoji");
 const clear = require("clear");
 const chalk = require("chalk");
 
+//I built an array of card objects(cards) that includes the major arcarna cards with name and meaning
 const majorArcanaCards = [
   {
     name: ` ${emoji.get("clown_face")} ${chalk.underline.bold.magenta(
@@ -242,10 +247,10 @@ const majorArcanaCards = [
     meaning: `
                      ${chalk.cyanBright.blueBright(` 
                    The Sun symbolizes success, joy and vitality. It signifies clarity, confidence, and optimism in
-                    all areas of life. This card suggests embracing your true self and expressing your unique gifts.
-                    It advices basking in the warmth of happiness and sharing your light with others. The Sun is about
-                    embracing the radiance of life and the fulfillment that comes with living our most authentic selves.
-                    The Sun embraces all the positive aspects of existence, bringing warmth, growth and enlightenment.\n`)}
+                   all areas of life. This card suggests embracing your true self and expressing your unique gifts.
+                   It advices basking in the warmth of happiness and sharing your light with others. The Sun is about
+                   embracing the radiance of life and the fulfillment that comes with living our most authentic selves.
+                  The Sun embraces all the positive aspects of existence, bringing warmth, growth and enlightenment.\n`)}
 
                 `,
   },
@@ -262,166 +267,247 @@ const majorArcanaCards = [
                 `,
   },
 ];
-const chooseTarotCard = (tarotDeck) => {
-  const randomIndex = Math.floor(Math.random() * tarotDeck.length);
-  const card = tarotDeck[randomIndex];
-  tarotDeck.splice(randomIndex, 1);
+
+/*This function selects a random card from the given deck of cards and makes sure that the
+ selected card is removed from the deck, so it cannot be selected again. (I ran into the issue of
+ a card repeating within a single reading
+ 1.the fn takes the argument deck which is the arr of obj (majorArcarna)
+ 2.We generate a random floating point (remember that Math random generates
+ a rando num ,floating point, 0 incl 1 excl)
+ Math rando * deck helps us to scale this 'num' to a range from (incl) 0  to legth of deck(excl)
+ Math floor(Math round would work too) helps us round this number giving us a round interger  from 0 to (length of deck) -1
+ We use this integer to select a card from the deck
+
+ I used splice (randomIndex,1) to modify the deck by removing one elemnt at the specified(randomindex)
+ Splice returns an array containing the removed  elements
+ [0] helps us access the element returned by splice(this is the removed card)
+ the card is stored in a variable(card)
+ //We return the card that was removed from the deck
+ */
+const chooseTarotCard = (deck) => {
+  const randomIndex = Math.floor(Math.random() * deck.length);
+  const card = deck.splice(randomIndex, 1)[0];
   return card;
 };
 
-const performAReading = (typeOfReading) => {
-  clear();
-  let chosenCards = [];
-  let describeTypeOfReading = "";
-  let tarotDeck = [...majorArcanaCards];
+/*I ran into styling problems in the terminal because my app is super wordy
+The (PrintCardDetails) came in handy because I can print the details of a 
+card in a styled format.
 
-  switch (typeOfReading) {
-    case "one":
-      chosenCards.push(chooseTarotCard(tarotDeck));
-      describeTypeOfReading = chalk.bold.magentaBright("🔮 One-Card Reading:");
-      break;
-    case "two":
-      describeTypeOfReading = chalk.bold.magentaBright(
-        "🔮🔮 Two-Card Reading: \n🔸 Situation, 🔸 Challenge"
-      );
-      for (let i = 0; i < 2; i++) {
-        chosenCards.push(chooseTarotCard(tarotDeck));
-      }
-      break;
-    case "three":
-      describeTypeOfReading = chalk.bold.magentaBright(
-        "🔮🔮🔮 Three-card Reading: \n🔸 Past, 🔸 Present, 🔸 Future"
-      );
-      for (let i = 0; i < 3; i++) {
-        chosenCards.push(chooseTarotCard(tarotDeck));
-      }
-      break;
-    default:
-      console.log(chalk.red("Invalid Reading Type"));
-      return;
-  }
+1. The card argument is the card object that contains card name and meaning
 
-  console.log(
-    chalk.underline.bold.magentaBright(
-      "🔮 Welcome to Makhosi's Tarot Card Reading App! 🔮\n"
-    )
-  );
-  console.log(describeTypeOfReading);
+2. with card.meaning.trim().split("\n"): splits the meaning of the cards into individual lines, removing any whitespace
+from beginning to end.
 
-  chosenCards.forEach((card, index) => {
-    const lines = card.meaning.trim().split("\n");
+3. lines.forEach is used to iterate through each line of the card's meaning and prints it.
 
-    console.log(chalk.yellowBright(`\n${card.name}:`));
-    lines.forEach((line) => {
-      console.log(`  ${line.trim()}`);
-    });
-    if (index < chosenCards.length - 1) {
-      console.log(
-        "\n-----------------------------------------------------------------------------------------------------------------------------------------\n"
-      );
-    }
-  });
+This I found made the terminal easier to read and as a form of 'text formatting'
 
+*/
+
+const printCardDetails = (card) => {
+  const lines = card.meaning.trim().split("\n");
+  console.log(chalk.bold.underline.yellowBright(`\n${card.name}:`));
+  lines.forEach((line) => console.log(`  ${line.trim()}`));
+};
+
+/*After seeing how the above worked I used a fn to print my headers as I found it myade my code much more intuitive
+(for future me who wants to keep building  this app :) )
+This fn(printHeader) prints a header with a given title in a styled format.(this was to keep styling of headers uniform)
+the title is the text we will print as header(We will see how this function is used in the below code)
+
+*/
+
+const printHeader = (title) => {
+  console.log(chalk.underline.bold.magentaBright(`\n🔮 ${title} 🔮\n`));
+};
+
+/*
+
+I added this function a bit later on in the project but I saw the need for it because
+I wanted to keep the user in the main menu and give the user an opportunity to make various choices instead of one before the game exits
+This fn promps user to press Enter to continue
+We use readlinesync to wait for the user to press enter.
+
+*/
+
+const waitForEnter = () => {
   console.log(chalk.green("\nPress Enter to return to the main menu."));
   readlineSync.question();
+};
+
+/*This is a function that perfoms our one card reading
+We start with a cosnsole.clear() this clears the console for better reading and no crowding
+we use the chalk library to print the tite
+We call our chooseTarot card function to select our random card
+We call our print card details(card) to print the selected card details
+
+We call our wait for enter fn to keep the user in the game and to wait for user to press enter to return to the main menu
+
+*/
+const oneCardReading = () => {
+  console.clear();
+  console.log(chalk.bold.magentaBright("🔮 One-Card Reading:"));
+  const card = chooseTarotCard(majorArcanaCards);
+  printCardDetails(card);
+  waitForEnter();
+};
+
+/*
+We follow the same logic as above using bracket notation we access two cards instead of one and print their details
+
+*/
+
+const twoCardReading = () => {
+  console.clear();
+  console.log(
+    chalk.bold.magentaBright(
+      "🔮🔮 Two-Card Reading: \n🔸 Situation, 🔸 Challenge"
+    )
+  );
+  const cards = [
+    chooseTarotCard(majorArcanaCards),
+    chooseTarotCard(majorArcanaCards),
+  ];
+  cards.forEach(printCardDetails);
+  waitForEnter();
+};
+
+/*
+We follow the same logic as above using bracket notation we access three cards instead of one and print their details
+
+*/
+
+const threeCardReading = () => {
+  console.clear();
+  console.log(
+    chalk.bold.magentaBright(
+      "🔮🔮🔮 Three-Card Reading: \n🔸 Past, 🔸 Present, 🔸 Future"
+    )
+  );
+  const cards = [
+    chooseTarotCard(majorArcanaCards),
+    chooseTarotCard(majorArcanaCards),
+    chooseTarotCard(majorArcanaCards),
+  ];
+  cards.forEach(printCardDetails);
+  waitForEnter();
 };
 
 const displayTarotInstructions = () => {
-  clear();
-  console.log(
-    chalk.underline.bold.magentaBright(
-      "🔮 Welcome to Makhosi's Tarot Card Reading App! 🔮\n"
-    )
-  );
-  console.log(
-    chalk.bold.bgBlueBright.blue("🌼 INSTRUCTIONS FOR TAROT READING: 🌼")
-  );
-  console.log(chalk.bold.bgGreenBright("Shuffling and Selecting Cards:"));
-  console.log(chalk.yellowBright("1. One-Card Reading: Get a quick insight."));
-  console.log(
-    chalk.yellowBright(
-      "2. Two-Card Reading: Explore a situation and its challenge."
-    )
-  );
-  console.log(
-    chalk.yellowBright(
-      "3. Three-Card Reading: Understand the past, present, and future."
-    )
-  );
-
-  console.log(chalk.green("\nPress Enter to return to the main menu."));
-  readlineSync.question();
+  console.clear();
+  const instructions = `
+    Shuffling and Selecting Cards:
+    1. One-Card Reading: Get a quick insight.
+    2. Two-Card Reading: Explore a situation and its challenge.
+    3. Three-Card Reading: Understand the past, present, and future.
+  `;
+  const disclaimer = `
+  Disclaimer: This app is for gaming purposes only. The producers are not
+  responsible for any decisions made after inquiring our cards.`;
+  printHeader("Instructions for Tarot Reading");
+  console.log(chalk.yellowBright(instructions));
+  console.log(chalk.bold.redBright(disclaimer));
+  waitForEnter();
 };
 
 const displayTarotHistory = () => {
-  clear();
-  console.log(
-    chalk.bold.underline.magentaBright("\n🌟  History of Tarot Cards 🌟")
-  );
-  console.log(chalk.bold.bgBlueBright.blue("🌼 ORIGINS OF TAROT: 🌼"));
-  console.log(
-    chalk.yellowBright(
-      `
-    Tarot cards have been used for centuries as a tool for divination and insight. Originating in the mid-15th century in Europe, 
-    they were initially used for playing games. Over time, they evolved into a method for spiritual and self-reflection, with each 
+  console.clear();
+  const history = `
+    Tarot cards have been used for centuries as a tool for divination and insight. Originating in the mid-15th century in Europe,
+    they were initially used for playing games. Over time, they evolved into a method for spiritual and self-reflection, with each
     card holding unique symbolism and meaning.
-    `
-    )
-  );
-
-  console.log(chalk.green("\nPress Enter to return to the main menu."));
-  readlineSync.question();
+  `;
+  printHeader("History of Tarot Cards");
+  console.log(chalk.yellowBright(history));
+  waitForEnter();
 };
 
-const gameMenu = () => {
-  let exitGame = false;
+/*This array contains objects representing each menu option.
+Each object has:
+optionKey: A string representing the user's choice (e.g., "1" for Instructions).
+description: A string representing the menu text.
+action: A function to be executed when the corresponding option is selected. 
 
-  while (!exitGame) {
-    clear();
-    console.log(
-      chalk.underline.bold.magentaBright(
-        "🔮 Welcome to Makhosi's Tarot Card Reading App! 🔮\n"
-      )
-    );
+
+I chose this way of compartmelising the code for more readibility and in an effort to "separate my concerns"
+*/
+const mainMenuOptions = [
+  {
+    optionKey: "1",
+    description: "📜 Instructions",
+    action: displayTarotInstructions,
+  },
+  {
+    optionKey: "2",
+    description: "📚 History of Tarot",
+    action: displayTarotHistory,
+  },
+  {
+    optionKey: "3",
+    description: "🔮 One-Card Reading",
+    action: oneCardReading,
+  },
+  {
+    optionKey: "4",
+    description: "🔮 Two-Card Reading",
+    action: twoCardReading,
+  },
+  {
+    optionKey: "5",
+    description: "🔮 Three-Card Reading",
+    action: threeCardReading,
+  },
+  {
+    optionKey: "6",
+    description: "❌ Exit",
+    action: () => {
+      console.log(chalk.bold.magentaBright("Goodbye! 🌈"));
+      process.exit(0);
+    },
+  },
+];
+
+/* 
+When the gameMenu function runs:
+
+It repeatedly clears the screen and prints a styled header.(We use our prinHeader fn())
+It builds and displays a menu with options for the user to choose from.(menuText)
+It waits for the user to enter their choice.
+It finds the corresponding action based on the user's choice and executes it.
+If the user enters an invalid choice, it displays an error message and waits 
+for the user to press Enter before showing the menu again.
+This loop continues until the user selects the "Exit" option, this prints a goodbye message 
+and ends the program using process.exit(0):fn of Node modules that helps exit applications.
+
+*/
+
+const gameMenu = () => {
+  while (true) {
+    console.clear();
+    printHeader("Welcome to Makhosi's Tarot Card Reading App!");
+    const menuText = mainMenuOptions
+      .map((option) => `${option.optionKey}. ${option.description}`)
+      .join("\n");
     const choice = readlineSync.question(
       chalk.blue(
-        chalk.bold.underline.yellowBright("CHOOSE A READING:\n") +
-          "🔮[1] One-Card Reading\n" +
-          "🔮[2] Two-Card Reading\n" +
-          "🔮[3] Three-Card Reading\n" +
-          "📜[4] Instructions\n" +
-          "📚[5] History of Tarot\n" +
-          chalk.red("  [6]❌  Exit\n\n") +
-          chalk.greenBright("Enter your choice: ")
+        chalk.bold.underline.yellowBright("MAIN MENU:\n") +
+          menuText +
+          chalk.greenBright("\nEnter your choice: ")
       )
     );
-    switch (choice) {
-      case "1":
-        console.log(chalk.blue("Performing 1 card reading..."));
-        performAReading("one");
-        break;
-      case "2":
-        console.log(chalk.blue("Performing 2 card reading..."));
-        performAReading("two");
-        break;
-      case "3":
-        console.log(chalk.blue("Performing 3 card reading..."));
-        performAReading("three");
-        break;
-      case "4":
-        displayTarotInstructions();
-        break;
-      case "5":
-        displayTarotHistory();
-        break;
-      case "6":
-        console.log("Goodbye! 🌈");
-        exitGame = true;
-        break;
-      default:
-        console.log(chalk.red("Invalid Choice! ❌"));
+
+    const selectedOption = mainMenuOptions.find(
+      (option) => option.optionKey === choice
+    );
+    if (selectedOption) {
+      selectedOption.action();
+    } else {
+      console.log(chalk.red("Invalid Choice! ❌"));
+      waitForEnter();
     }
   }
 };
 
+/*Calls the gameMenu function to start the program and display the main menu. */
 gameMenu();

@@ -10,11 +10,13 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "audioplayer": "^3.1.4",
     "chalk": "^3.0.0",
     "clear": "^0.1.0",
     "colors": "^1.4.0",
     "inquirer": "^8.2.4",
     "node-emoji": "^2.1.3",
+    "play-sound": "^1.1.6",
     "readline-sync": "^1.4.10",
     "terminal-kit": "^3.1.1"
   }
