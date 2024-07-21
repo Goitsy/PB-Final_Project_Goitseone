@@ -18,14 +18,14 @@
 
 ## 🚀 Installation
 
-### 1.Clone the Repository:
+#### 1.Clone the Repository:
 
 ```
 git clone https://github.com/Goitsy/PB-Final_Project_Goitseone.git
 cd PB-Final_Project_Goitseone
 ```
 
-### Install Dependencies:
+#### 2. Install Dependencies:
 
 Ensure you have Node.js installed. Then, install the necessary packages:
 
@@ -33,7 +33,7 @@ Ensure you have Node.js installed. Then, install the necessary packages:
 npm install
 ```
 
-## 📝 Usage
+#### 3. 📝 Usage
 
 Run the application in your terminal:
 
@@ -107,3 +107,18 @@ Press Enter to return to the main menu.
 
 Special thanks to my mentors Luke and Gerhard.
 Extended thanks to my classmates (Gerardo, Fardin) for their valuable feedback.
+
+## 📖 sources
+
+1. <b>Stackoverflow:</b>
+   https://stackoverflow.com/questions/22063080/better-way-to-create-text-based-game
+
+2. <b>node-emoji:</b> https://www.npmjs.com/package/node-emoji
+
+3. <b>console: clear() static method:</b> https://developer.mozilla.org/en-US/docs/Web/API/console/clear_static
+
+4. <b>chalk:</b> https://www.npmjs.com/package/chalk
+
+5. <b>readline-sync:</b> https://www.npmjs.com/package/readline-sync
+
+6. <b>PB repository:</b> https://github.com/dci-fbw-wd-24-e02/PB
