@@ -486,20 +486,45 @@ const gameMenu = () => {
   while (true) {
     console.clear();
     printHeader("Welcome to Makhosi's Tarot Card Reading App!");
+
+    /*Builds the text for the menu by mapping over mainMenuOptions and 
+      combining each option's key and description into a single string.
+      Usage: mainMenuOptions is an array of objects where each object represents 
+      an option in the menu . map transforms this array into an array of strings 
+      formatted as key. description.
+      Example: If mainMenuOptions has items like { optionKey: '1', description:
+ '📜 Instructions' }, this step will create a string like 1. 📜 Instructions. */
     const menuText = mainMenuOptions
       .map((option) => `${option.optionKey}. ${option.description}`)
       .join("\n");
+
+    //User promt that waits for input from the user. This stops execution until user
+    //gives input and presses enter
     const choice = readlineSync.question(
       chalk.blue(
         chalk.bold.underline.yellowBright("MAIN MENU:\n") +
           menuText +
-          chalk.greenBright("\nEnter your choice: ")
+          chalk.greenBright("\nMake your choice 1...6: ")
       )
     );
-
+    /*Purpose: This  is used to find the  options (from our menu) that match with our user's input.
+         I use the find()method
+    Usage: The find method searches through the mainMenuOptions array and returns
+    the first element that satisfies the provided testing function.
+    Testing Function: (option) => option.optionKey === choice
+    This means for each element in mainMenuOptions, the function 
+    checks if the optionKey property of the element matches the user's choice. 
+    If a match is found, that element is returned.
+    Result: If a match is found, selectedOption will be assigned the corresponding object 
+     from mainMenuOptions. If no match is found, selectedOption will be undefined. */
     const selectedOption = mainMenuOptions.find(
       (option) => option.optionKey === choice
     );
+
+    /*THis checks if our 'selectedOption' is true and if true we call the action method that is in  our array of menu option objects
+    else we tell the user that they made an invalid choice
+    wait for enter is a function we defined above that waits for user to press enter before returning to main menu
+    */
     if (selectedOption) {
       selectedOption.action();
     } else {
@@ -509,5 +534,5 @@ const gameMenu = () => {
   }
 };
 
-/*Calls the gameMenu function to start the program and display the main menu. */
+/*Calls the gameMenu function to start the app and display our main menu. */
 gameMenu();
