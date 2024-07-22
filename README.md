@@ -4,15 +4,15 @@
 
 ## 🌟 Features
 
+📜 Instructions: Learn how to use the app.
+
+📚 History of Tarot: Discover the origins and history of tarot cards.
+
 🔮 One-Card Reading: Get a quick insight.
 
 🔮🔮 Two-Card Reading: Explore a situation and its challenge.
 
 🔮🔮🔮 Three-Card Reading: Understand the past, present, and future.
-
-📜 Instructions: Learn how to use the app.
-
-📚 History of Tarot: Discover the origins and history of tarot cards.
 
 ## 🚀 Installation
 
