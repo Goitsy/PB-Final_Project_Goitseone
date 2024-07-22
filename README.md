@@ -1,8 +1,6 @@
 # 📖 Makhosi's Tarot Card Reading App 🌟
 
-### Welcome to Makhosi's Tarot Card Reading App! This terminal-based application allows you to explore
-
-### the mystical world of tarot readings, providing insights and guidance through a virtual deck of tarot cards.
+### Welcome to Makhosi's Tarot Card Reading App! This terminal-based application allows you to explore the mystical world of tarot readings, providing insights and guidance through a virtual deck of tarot cards.
 
 ## 🌟 Features
 

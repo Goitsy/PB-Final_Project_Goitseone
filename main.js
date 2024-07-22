@@ -536,3 +536,19 @@ const gameMenu = () => {
 
 /*Calls the gameMenu function to start the app and display our main menu. */
 gameMenu();
+
+/* FUTURE VERSIONS:
+-make code more readible by placing arr obj in different files
+-Refactor functions to make game more intuitive
+     *Problems with console.clear() and clear(); sometimes doesnt clear console 
+     in a timely manner.
+
+     *Work on integrating other divination traditions and using this code as a starting point
+     on how to effectively build something similar but not the same
+
+     *Think and research about functional programming in JS
+
+     *write more functions :-)
+
+
+*/
