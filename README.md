@@ -43,15 +43,17 @@ Follow the on-screen prompts to navigate through the menu and choose your readin
 
 ## 📜 Menu Options
 
-1.<b> One-Card Reading:</b> Choose this option to draw a single card for a quick insight.
+1.<b>Instructions:</b> Learn how to use the app and understand the different types of readings.
 
-2.<b>Two-Card Reading:</b> Choose this to draw two cards representing a situation and its challenge.
+2.<b>History of Tarot:</b> Read about the origins and evolution of tarot cards.
 
-3.<b> Three-Card Reading:</b> Choose this to draw three cards representing the past, present, and future.
+3.<b> One-Card Reading:</b> Choose this option to draw a single card for a quick insight.
 
-4.<b>Instructions:</b> Learn how to use the app and understand the different types of readings.
+4.<b>Two-Card Reading:</b> Choose this to draw two cards representing a situation and its challenge.
 
-5.<b>History of Tarot:</b> Read about the origins and evolution of tarot cards. 6.<b>Exit:</b> Exit the application.
+5.<b> Three-Card Reading:</b> Choose this to draw three cards representing the past, present, and future.
+
+6.<b>Exit:</b> Choose this to exit game/app.
 
 ## 📚 Tarot Cards
 
