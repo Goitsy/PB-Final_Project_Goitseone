@@ -70,11 +70,11 @@ readme.md: This file.
 🔮 Welcome to Makhosi's Tarot Card Reading App! 🔮
 
 Choose a Reading:
-🔮[1] One-Card Reading
-🔮[2] Two-Card Reading
-🔮[3] Three-Card Reading
-📜[4] Instructions
-📚[5] History of Tarot
+📜[1] Instructions
+📚[2] History of Tarot
+🔮[3] One-Card Reading
+🔮[4] Two-Card Reading
+🔮[5] Three-Card Reading
 ❌[6] Exit
 
 
@@ -89,12 +89,11 @@ Enter your choice: 3
 ✨🚂THE CHARIOT🚂✨:
    The Chariot points at a time of great determination, willpower, and victory. It suggests overcoming obstacles through consistent focus and perseverance. This card represents taking control of your life's direction and relying on your inner strength. It advises setting clear goals and staying committed to achieving them, despite challenges. The Chariot embodies the triumph of leaning on your inner determination, discipline, highlighting the need for balance, and the mastery of emotions to achieve success.
 
------------------------------------------------------------------------------------------------------------------------------------------
 
 🛞🌀WHEEL OF FORTUNE🛞🌀:
    The Wheel of Fortune symbolizes destiny, change, and cycles. It signifies the ebb and flow of life's experiences and the influence of fate. This card suggests being open to new opportunities and embracing the changes that come your way. It advises trusting in the natural rhythm of life and remaining adaptable to circumstances. The Wheel of Fortune highlights the interconnectedness of events and the importance of being mindful of the choices that influence your life's path.
 
------------------------------------------------------------------------------------------------------------------------------------------
+
 
 🌠🌠🌟🌟THE STAR🌟🌟🌠🌠:
    The Star represents hope, inspiration, and optimism. It signifies healing and renewal after challenging times. This card suggests trusting in divine guidance and believing in brighter days ahead. It advises staying hopeful and open to receiving blessings and opportunities that align with your highest purpose. The Star is about the guiding light of inspiration and the profound sense of peace that comes from a connection to the divine and life's abundant possibilities.
